@@ -1,0 +1,28 @@
+name: run-receipts
+version: 0.1.0
+manifest_version: 2
+api_version: 1
+description: Writes one small receipt per agent-backed cron run, outside the job's own output - job id, session id, times, tool-call and tool-error counts, tool names, and an outcome (delivered, silent_checked, silent_unchecked, silent_with_errors, failed, incomplete). Observer only; fails open. No tool arguments or tool results are stored.
+author: Deploy Axiom
+license: MIT
+requires_hermes: ">=0.22.5"
+platforms: [macos, linux]
+provides_tools:
+  - run_receipts_query
+provides_hooks:
+  - on_session_start
+  - post_tool_call
+  - post_llm_call
+  - on_session_end
+config_schema:
+  state_dir:
+    type: string
+    description: Directory for receipts.jsonl (default <HERMES_HOME>/run-receipts).
+  keep_days:
+    type: integer
+    default: 30
+    description: Receipts older than this many days are pruned when a new one is written.
+  store_reason:
+    type: boolean
+    default: false
+    description: Opt in to keeping up to 200 characters of sensitive silent response text in the local file only; queries never return it.
