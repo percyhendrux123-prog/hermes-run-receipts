@@ -1,5 +1,7 @@
 # run-receipts for Hermes Agent
 
+> **Part of the seat**, a collection of Hermes plugins that work together: watch, decide, act, prove, hand off. This one covers **watch**: each scheduled job the agent runs leaves a receipt. [See the whole collection](https://github.com/percyhendrux123-prog#the-seat-a-collection-of-hermes-plugins).
+
 A silent cron run and a cron run that never finished its check look the same from the outside. The usual way to tell them apart is the job's own output, which is the job describing itself.
 
 run-receipts is a small plugin for [Hermes Agent](https://github.com/NousResearch/hermes-agent). When it sees an **agent-backed cron run** end, it writes a receipt separate from job output: which job ran, when, which tool calls were observed, which were flagged as errors, and how the run was classified. You can then ask "did the watcher call any tools before going silent?"
