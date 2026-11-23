@@ -1,0 +1,21 @@
+{
+  "name": "axiom-run-receipts",
+  "displayName": "Run Receipts",
+  "version": "0.1.0",
+  "description": "Writes one private receipt per Claude Code session or headless run: outcome and tool counts, never arguments, results or text. Includes /axiom-run-receipts:receipts to read them back.",
+  "author": {
+    "name": "Deploy Axiom"
+  },
+  "homepage": "https://github.com/percyhendrux123-prog/hermes-run-receipts",
+  "repository": "https://github.com/percyhendrux123-prog/hermes-run-receipts",
+  "license": "MIT",
+  "keywords": [
+    "audit",
+    "receipts",
+    "headless",
+    "hooks",
+    "logging",
+    "observability"
+  ],
+  "icon": "./.claude-plugin/icon.png"
+}

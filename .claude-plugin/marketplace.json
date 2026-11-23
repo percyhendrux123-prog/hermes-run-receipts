@@ -1,0 +1,16 @@
+{
+  "name": "deploy-axiom-run-receipts",
+  "owner": {
+    "name": "Deploy Axiom"
+  },
+  "metadata": {
+    "description": "Run-receipts for Claude Code, from Deploy Axiom."
+  },
+  "plugins": [
+    {
+      "name": "axiom-run-receipts",
+      "source": "./claude-plugin/run-receipts",
+      "description": "Writes one private receipt per Claude Code session or headless run: outcome and tool counts, never arguments, results or text."
+    }
+  ]
+}

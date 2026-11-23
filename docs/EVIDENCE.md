@@ -48,3 +48,20 @@ Adversarial-review regressions assert that a persistent cleanup failure neither 
 ## Not verified
 
 `hermes plugins validate .` and a scheduler smoke for this revision require a Hermes host. These tests do not verify transport delivery. Script-mode (`no_agent`) crons are not covered (see README).
+
+## Claude Code port (claude-plugin/run-receipts)
+
+Run on macOS, Python 3 stdlib only, Claude Code 2.1.325.
+
+```
+$ python3 -W error::ResourceWarning -m unittest discover -s claude-plugin/tests
+Ran 63 tests ... OK
+$ python3 -m unittest discover -s tests
+Ran 88 tests ... OK
+$ claude plugin validate --strict claude-plugin/run-receipts   # Validation passed
+$ claude plugin validate --strict .                            # Validation passed
+```
+
+The 63 new tests run the real hook and query scripts as subprocesses with sample hook events: every outcome, multi-session separation, subagent events ignored, compaction and restart handling, stale-session recovery, pruning, 0600/0700 modes, symlink refusal, garbage input and unwritable directories (fail open, empty stdout), no canary text reaching disk, read-only queries, tampered-row filtering, manifest and hook-event checks.
+
+Live check: headless `claude -p` runs in a throwaway `CLAUDE_CONFIG_DIR`, plugin installed from this checkout. Receipts were written for a run with two Bash calls (`completed`), a run with no tools (`completed_no_tools`), and a run whose Bash call failed (`completed_with_errors`, 1 error). `claude -p "/axiom-run-receipts:receipts suspicious"` read the failed-call receipt back. `StopFailure`, interactive sessions and resumed sessions were not exercised live.

@@ -100,6 +100,15 @@ python3 -m unittest discover -s tests
 
 Stdlib only, no network, no Hermes install. Set `HERMES_AGENT_SRC` to a source checkout to compare the fallback against its gateway matcher. That optional test does not exercise the scheduler emitter. See `docs/EVIDENCE.md` for a `TMPDIR` example and the test scope.
 
+## Also for Claude Code
+
+The same idea ships as a Claude Code plugin in [`claude-plugin/run-receipts`](claude-plugin/run-receipts). It writes one receipt per session or headless `claude -p` run (outcome and tool counts, owner-only, fails open) from Claude Code's hook events, and adds `/axiom-run-receipts:receipts` to read them back. It records every session rather than only scheduled ones, and its outcomes differ from the ones above because Claude Code has no silent marker; the plugin README lists the gaps. It is separate from the Hermes plugin and needs no Hermes install.
+
+```sh
+claude plugin marketplace add percyhendrux123-prog/hermes-run-receipts
+claude plugin install axiom-run-receipts@deploy-axiom-run-receipts
+```
+
 ## License
 
 MIT
